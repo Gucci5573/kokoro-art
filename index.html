@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あなたの特性発見診断</title>
+<style>
+:root {
+  --orange: #F29C38;
+  --yellow: #F5C744;
+  --brown: #4A3C31;
+  --ivory: #FDFBF7;
+  --cream: #FFF9E6;
+  --coral: #E07A5F;
+  --light-gray: #E8E2D5;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: '游ゴシック', 'Yu Gothic', 'YuGothic', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+  color: var(--brown);
+  background: var(--ivory);
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+@media (min-width: 768px) {
+  .container { padding: 80px 32px; }
+}
+
+.screen { display: none; animation: fadeIn 0.5s ease; }
+.screen.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* トップ画面 */
+.top-hero { text-align: center; padding: 20px 0 40px; }
+.top-hero .emoji {
+  font-size: 60px; margin-bottom: 16px; display: inline-block;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+
+
+
+
+@media (min-width: 768px) {
+  
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.top-hero h1 {
+  font-size: 26px; line-height: 1.6; margin-bottom: 16px;
+  font-weight: 700; color: var(--brown);
+}
+
+@media (min-width: 768px) {
+  .top-hero h1 { font-size: 32px; }
+}
+
+.top-hero h1 .accent {
+  background: linear-gradient(transparent 60%, var(--yellow) 60%);
+  padding: 0 4px;
+}
+
+.top-hero .sub {
+  font-size: 16px; line-height: 2;
+  margin-bottom: 30px; color: var(--brown);
+}
+
+.feature-list {
+  background: var(--cream); border-radius: 16px;
+  padding: 24px; margin: 30px 0 40px; text-align: left;
+}
+
+.feature-list h2 {
+  font-size: 19px; font-weight: 700;
+  margin-bottom: 16px; color: var(--brown);
+}
+
+.feature-list ul { list-style: none; }
+.feature-list li {
+  padding: 8px 0 8px 32px; position: relative;
+  font-size: 16px; line-height: 1.8;
+}
+
+.feature-list li::before {
+  content: '✓'; position: absolute; left: 8px; top: 8px;
+  color: var(--orange); font-weight: 700; font-size: 18px;
+}
+
+.btn {
+  display: inline-block; background: var(--orange); color: white;
+  border: none; border-radius: 50px; padding: 18px 40px;
+  font-size: 17px; font-weight: 700; cursor: pointer;
+  text-decoration: none; transition: all 0.3s ease;
+  font-family: inherit; letter-spacing: 0.06em;
+  box-shadow: 0 4px 12px rgba(242, 156, 56, 0.3);
+  min-height: 60px; line-height: 1.4;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(242, 156, 56, 0.4);
+  filter: brightness(1.08);
+}
+
+.btn-block { display: block; width: 100%; text-align: center; }
+.btn-line { background: #06C755; box-shadow: 0 4px 12px rgba(6, 199, 85, 0.3); }
+.btn-line:hover { box-shadow: 0 6px 16px rgba(6, 199, 85, 0.4); }
+.btn-center { text-align: center; margin: 30px 0; }
+
+.btn-outline {
+  background: white; color: var(--orange);
+  border: 2px solid var(--orange); box-shadow: none;
+}
+
+.btn-outline:hover {
+  background: var(--cream); box-shadow: 0 4px 12px rgba(242, 156, 56, 0.2);
+}
+
+/* 入力フォーム */
+.form-card {
+  background: white; border-radius: 20px; padding: 30px 24px;
+  box-shadow: 0 4px 20px rgba(74, 60, 49, 0.06); margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .form-card { padding: 40px 36px; }
+}
+
+.form-group { margin-bottom: 24px; }
+
+.form-label {
+  display: block;
+  font-size: 16px; font-weight: 700;
+  margin-bottom: 10px; color: var(--brown);
+}
+
+.form-label .required {
+  display: inline-block;
+  background: var(--orange); color: white;
+  font-size: 11px; padding: 2px 10px;
+  border-radius: 50px; margin-left: 8px;
+  font-weight: 700; letter-spacing: 0.05em;
+}
+
+.form-input, .form-select {
+  width: 100%; padding: 14px 18px;
+  border: 2px solid var(--light-gray); border-radius: 12px;
+  font-size: 16px; font-family: inherit; color: var(--brown);
+  background: var(--ivory); transition: all 0.2s ease;
+  letter-spacing: 0.06em;
+}
+
+.form-input:focus, .form-select:focus {
+  outline: none; border-color: var(--orange);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(242, 156, 56, 0.1);
+}
+
+.form-date-group {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 10px;
+}
+
+.gender-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 480px) {
+  .gender-options { grid-template-columns: 1fr; }
+}
+
+.gender-option {
+  padding: 14px 12px;
+  border: 2px solid var(--light-gray); border-radius: 12px;
+  background: var(--ivory); cursor: pointer;
+  text-align: center; font-size: 15px; font-weight: 500;
+  color: var(--brown); font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.gender-option:hover {
+  border-color: var(--orange); background: var(--cream);
+}
+
+.gender-option.selected {
+  border-color: var(--orange); background: var(--cream);
+  box-shadow: 0 0 0 4px rgba(242, 156, 56, 0.1);
+  font-weight: 700;
+}
+
+.form-note {
+  font-size: 13px; color: var(--brown);
+  opacity: 0.7; margin-top: 8px; line-height: 1.6;
+}
+
+.form-error {
+  font-size: 13px; color: #E07A5F;
+  margin-top: 8px; font-weight: 500;
+  display: none;
+}
+
+.form-error.show { display: block; }
+
+/* バージョン選択 */
+.version-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 14px; margin: 30px 0;
+}
+
+@media (min-width: 600px) {
+  .version-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.version-card {
+  background: white; border: 2px solid var(--light-gray);
+  border-radius: 16px; padding: 20px 12px; text-align: center;
+  cursor: pointer; transition: all 0.3s ease;
+  font-size: 14px; font-weight: 700; color: var(--brown);
+}
+
+.version-card .icon { font-size: 32px; display: block; margin-bottom: 8px; }
+
+.version-card:hover {
+  border-color: var(--orange); transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(242, 156, 56, 0.15);
+}
+
+.version-card.selected { border-color: var(--orange); background: var(--cream); }
+
+.section-title {
+  font-size: 22px; font-weight: 700; text-align: center;
+  margin-bottom: 12px; color: var(--brown); line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .section-title { font-size: 28px; }
+}
+
+.section-sub {
+  text-align: center; font-size: 16px; color: var(--brown);
+  margin-bottom: 30px; line-height: 1.9;
+}
+
+/* 質問画面 */
+.progress-bar {
+  background: var(--light-gray); border-radius: 50px;
+  height: 8px; overflow: hidden; margin-bottom: 8px;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, var(--yellow), var(--orange));
+  height: 100%; width: 0%;
+  transition: width 0.4s ease; border-radius: 50px;
+}
+
+.progress-text {
+  font-size: 13px; color: var(--brown); text-align: center;
+  margin-bottom: 6px; letter-spacing: 0.1em;
+}
+
+.encourage-text {
+  font-size: 13px; color: var(--orange); text-align: center;
+  margin-bottom: 30px; font-weight: 700;
+  animation: fadeIn 0.5s ease;
+}
+
+.question-card {
+  background: white; border-radius: 20px; padding: 30px 24px;
+  box-shadow: 0 4px 20px rgba(74, 60, 49, 0.06); margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .question-card { padding: 40px 36px; }
+}
+
+.question-text {
+  font-size: 19px; line-height: 1.8; font-weight: 700;
+  margin-bottom: 24px; color: var(--brown);
+}
+
+@media (min-width: 768px) {
+  .question-text { font-size: 21px; }
+}
+
+.options { display: flex; flex-direction: column; gap: 12px; }
+
+.option {
+  background: var(--ivory); border: 2px solid var(--light-gray);
+  border-radius: 14px; padding: 16px 20px; cursor: pointer;
+  transition: all 0.25s ease; font-size: 16px; font-weight: 500;
+  line-height: 1.7; color: var(--brown); font-family: inherit;
+  text-align: left; width: 100%;
+}
+
+.option:hover {
+  border-color: var(--orange); background: var(--cream);
+  transform: translateX(4px);
+}
+
+.option.selected {
+  border-color: var(--orange); background: var(--cream);
+  box-shadow: 0 0 0 4px rgba(242, 156, 56, 0.1);
+}
+
+.q-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 20px; gap: 12px;
+}
+
+.btn-back {
+  background: transparent; color: var(--brown); border: none;
+  font-size: 14px; cursor: pointer; padding: 12px 16px;
+  font-family: inherit; text-decoration: underline;
+}
+
+.btn-back:hover { color: var(--orange); }
+.btn-back:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* 結果画面 */
+.result-hero {
+  background: linear-gradient(135deg, var(--cream) 0%, var(--ivory) 100%);
+  border-radius: 24px; padding: 40px 24px; text-align: center;
+  margin-bottom: 30px; position: relative; overflow: hidden;
+}
+
+.result-greeting {
+  font-size: 14px; color: var(--brown);
+  opacity: 0.8; margin-bottom: 12px;
+}
+
+.result-prelude {
+  font-size: 16px; color: var(--brown);
+  margin-bottom: 16px; font-weight: 500;
+  line-height: 1.6;
+}
+
+.character-message-top {
+  font-size: 13px; color: var(--brown); opacity: 0.7;
+  margin: 20px 0 10px; line-height: 1.7;
+}
+
+.result-label {
+  display: inline-block; background: var(--orange); color: white;
+  font-size: 12px; padding: 6px 18px; border-radius: 50px;
+  margin-bottom: 16px; letter-spacing: 0.15em; font-weight: 700;
+}
+
+.result-type {
+  font-size: 22px; font-weight: 700;
+  margin: 16px auto; line-height: 1.5;
+  display: inline-block;
+  padding: 14px 28px;
+  border: 2px solid var(--orange);
+  border-radius: 16px;
+  background: white;
+  color: var(--brown);
+}
+
+@media (min-width: 768px) {
+  .result-type { font-size: 28px; padding: 18px 36px; }
+}
+
+.result-tagline {
+  font-size: 16px; color: var(--brown); opacity: 0.85;
+  margin-bottom: 24px; line-height: 1.8;
+}
+
+.character-display {
+  background: white; border-radius: 20px; padding: 28px 24px;
+  margin: 20px 0; box-shadow: 0 4px 16px rgba(74, 60, 49, 0.08);
+}
+
+.character-version {
+  font-size: 12px; color: var(--brown); opacity: 0.6;
+  letter-spacing: 0.1em; margin-bottom: 12px;
+}
+
+.character-icon {
+  width: 100px; height: 100px;
+  margin: 0 auto 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.character-icon svg {
+  width: 100%; height: 100%;
+}
+
+.character-name {
+  font-size: 28px; font-weight: 700;
+  color: var(--orange); margin-bottom: 4px;
+}
+
+@media (min-width: 768px) {
+  .character-name { font-size: 32px; }
+}
+
+.character-drama {
+  font-size: 13px; color: var(--brown); opacity: 0.7;
+  margin-top: 2px; margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.character-emoji-large {
+  font-size: 60px;
+}
+
+.character-message {
+  font-size: 13px; color: var(--brown); opacity: 0.8;
+  line-height: 1.8; margin-top: 8px;
+}
+
+.result-section {
+  background: white; border-radius: 20px;
+  padding: 30px 24px; margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(74, 60, 49, 0.06);
+}
+
+@media (min-width: 768px) {
+  .result-section { padding: 36px; }
+}
+
+.result-section h3 {
+  font-size: 19px; font-weight: 700;
+  margin-bottom: 18px; color: var(--brown);
+  display: flex; align-items: center; gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .result-section h3 { font-size: 22px; }
+}
+
+.result-section .description {
+  font-size: 16px; line-height: 2.0;
+  color: var(--brown); margin-bottom: 14px;
+}
+
+.shine-list, .note-list, .activate-list { list-style: none; }
+
+.shine-list li, .note-list li, .activate-list li {
+  padding: 12px 0 12px 36px; position: relative;
+  font-size: 16px; line-height: 1.9;
+  border-bottom: 1px dashed var(--light-gray);
+}
+
+.shine-list li:last-child, .note-list li:last-child, .activate-list li:last-child { border-bottom: none; }
+
+.shine-list li::before {
+  content: '✨'; position: absolute; left: 0; top: 12px; font-size: 16px;
+}
+
+.note-list li::before {
+  content: '🌱'; position: absolute; left: 0; top: 12px; font-size: 16px;
+}
+
+.activate-list li::before {
+  content: '💡'; position: absolute; left: 0; top: 12px; font-size: 16px;
+}
+
+.activate-comment {
+  margin-top: 18px;
+  padding: 16px 20px;
+  background: var(--cream);
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--brown);
+  font-weight: 500;
+  text-align: center;
+  border: 1px dashed var(--orange);
+}
+
+.message-box {
+  background: var(--cream); border-radius: 16px;
+  padding: 24px; margin-top: 16px;
+  border-left: 4px solid var(--orange);
+}
+
+.message-box p {
+  font-size: 15px; line-height: 2.0; color: var(--brown);
+  margin: 0;
+}
+
+.version-switcher {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 16px; justify-content: center;
+}
+
+.v-chip {
+  background: var(--ivory); border: 2px solid var(--light-gray);
+  border-radius: 50px; padding: 8px 16px; font-size: 13px;
+  cursor: pointer; font-family: inherit; color: var(--brown);
+  transition: all 0.2s ease; font-weight: 500;
+}
+
+.v-chip:hover { border-color: var(--orange); background: var(--cream); }
+
+.v-chip.active {
+  background: var(--orange); color: white; border-color: var(--orange);
+}
+
+.share-section {
+  background: var(--cream); border-radius: 20px;
+  padding: 24px; margin: 20px 0; text-align: center;
+}
+
+.share-section h4 {
+  font-size: 16px; font-weight: 700;
+  margin-bottom: 14px; color: var(--brown);
+}
+
+.share-buttons {
+  display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+}
+
+.share-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px; padding: 12px 18px; border-radius: 50px;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  text-decoration: none; transition: all 0.2s ease;
+  border: none; font-family: inherit;
+  min-height: 44px;
+}
+
+.share-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+.share-x { background: #000; color: white; }
+.share-line { background: #06C755; color: white; }
+.share-copy {
+  background: white; color: var(--brown); border: 2px solid var(--light-gray);
+}
+.share-copy.copied {
+  background: var(--orange); color: white; border-color: var(--orange);
+}
+
+.cta-section {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--coral) 100%);
+  border-radius: 24px; padding: 40px 24px; text-align: center;
+  color: white; margin: 40px 0 20px;
+}
+
+.cta-section h3 {
+  font-size: 22px; font-weight: 700;
+  margin-bottom: 14px; line-height: 1.5; color: white;
+}
+
+@media (min-width: 768px) {
+  .cta-section h3 { font-size: 26px; }
+}
+
+.cta-section p {
+  font-size: 16px; line-height: 1.9;
+  margin-bottom: 24px; opacity: 0.95;
+}
+
+.line-cta {
+  background: white; border-radius: 24px;
+  padding: 36px 24px; text-align: center;
+  margin: 30px 0 20px;
+  box-shadow: 0 4px 20px rgba(74, 60, 49, 0.06);
+}
+
+.line-cta-icon {
+  font-size: 50px; margin-bottom: 12px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+
+
+
+
+@media (min-width: 768px) {
+  
+}
+
+.line-cta h3 {
+  font-size: 21px; font-weight: 700;
+  margin-bottom: 12px; line-height: 1.5;
+  color: var(--brown);
+}
+
+@media (min-width: 768px) {
+  .line-cta h3 { font-size: 24px; }
+}
+
+.line-cta h3 .accent {
+  background: linear-gradient(transparent 60%, var(--yellow) 60%);
+  padding: 0 4px;
+}
+
+.line-cta p {
+  font-size: 15px; line-height: 1.9;
+  margin-bottom: 20px; color: var(--brown);
+}
+
+.line-benefits-inline {
+  background: var(--cream); border-radius: 14px;
+  padding: 20px; margin: 16px 0 24px; text-align: left;
+}
+
+.line-benefits-inline h4 {
+  font-size: 15px; font-weight: 700;
+  margin-bottom: 12px; text-align: center;
+}
+
+.line-benefits-inline ul { list-style: none; }
+
+.line-benefits-inline li {
+  padding: 6px 0 6px 30px; position: relative;
+  font-size: 14px; line-height: 1.7;
+}
+
+.line-benefits-inline li::before {
+  content: '🎁'; position: absolute; left: 0; top: 5px;
+}
+
+.line-note-inline {
+  font-size: 12px; color: var(--brown);
+  opacity: 0.6; margin-top: 16px;
+}
+
+.retry-section { text-align: center; margin: 40px 0 20px; }
+
+.intro-message {
+  background: white; border-left: 4px solid var(--yellow);
+  border-radius: 8px; padding: 16px 20px;
+  margin: 20px 0 30px; font-size: 15px; line-height: 1.9;
+}
+
+.toast {
+  position: fixed; bottom: 30px; left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--brown); color: white;
+  padding: 14px 24px; border-radius: 50px;
+  font-size: 14px; font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  opacity: 0; transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1; transform: translateX(-50%) translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="container screen active" id="screen-top">
+  <div class="top-hero">
+    <h1>自分では気づきにくい<br><span class="accent">考え方や得意なことの傾向</span>を、<br>17の質問を通して<br>見つけてみませんか？</h1>
+  </div>
+
+  <div class="feature-list">
+    <h2>こんな方におすすめです</h2>
+    <ul>
+      <li>「自分らしい働き方」をこれから考えたい方</li>
+      <li>自分の強みを言葉にしたい方</li>
+      <li>新しいことに挑戦してみたい方</li>
+      <li>忙しい毎日の合間にサクッと診断したい方</li>
+    </ul>
+  </div>
+
+  <div class="intro-message">
+    📝 <strong>所要時間：約3分</strong><br>
+    17の質問でわかる、12タイプ診断です。<br>
+    結果は、豪華10バージョンで楽しめます♪
+  </div>
+
+  <div class="btn-center">
+    <button class="btn btn-block" onclick="goToProfileForm()">診断をはじめる ▶︎</button>
+  </div>
+</div>
+
+<div class="container screen" id="screen-profile">
+  <h2 class="section-title">まずはあなたのことを<br>教えてください ♪</h2>
+  <p class="section-sub">3つだけ入力してください</p>
+
+  <div class="form-card">
+    <div class="form-group">
+      <label class="form-label">お名前<span class="required">必須</span></label>
+      <input type="text" class="form-input" id="input-name" placeholder="例：山田 はなこ" maxlength="30">
+      <p class="form-note">ニックネームでも大丈夫です</p>
+      <p class="form-error" id="error-name">お名前を入力してください</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">生年月日<span class="required">必須</span></label>
+      <div class="form-date-group">
+        <select class="form-select" id="input-year"><option value="">年</option></select>
+        <select class="form-select" id="input-month"><option value="">月</option></select>
+        <select class="form-select" id="input-day"><option value="">日</option></select>
+      </div>
+      <p class="form-note">年齢の傾向を分析するために使用します</p>
+      <p class="form-error" id="error-birthday">生年月日を選択してください</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">性別<span class="required">必須</span></label>
+      <div class="gender-options">
+        <button class="gender-option" data-gender="female">女性</button>
+        <button class="gender-option" data-gender="male">男性</button>
+        <button class="gender-option" data-gender="other">その他</button>
+      </div>
+      <p class="form-error" id="error-gender">性別を選択してください</p>
+    </div>
+  </div>
+
+  <div class="btn-center">
+    <button class="btn btn-block" onclick="submitProfile()">次へ進む ▶︎</button>
+  </div>
+</div>
+
+<div class="container screen" id="screen-version">
+  <h2 class="section-title">どのバージョンで<br>結果を見たいですか？</h2>
+  <p class="section-sub">お気に入りを1つ選んでくださいね♪<br>(あとで他のバージョンに切り替えもできます)</p>
+
+  <div class="version-grid" id="version-grid"></div>
+
+  <div class="btn-center">
+    <button class="btn btn-block" id="version-next-btn" onclick="startQuestions()" disabled style="opacity: 0.4; cursor: not-allowed;">次へ進む ▶︎</button>
+  </div>
+</div>
+
+<div class="container screen" id="screen-question">
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <p class="progress-text" id="progress-text">Question 1 / 17</p>
+  <p class="encourage-text" id="encourage-text">いいスタートです♪</p>
+
+  <div class="question-card">
+    <p class="question-text" id="question-text"></p>
+    <div class="options" id="options-container"></div>
+  </div>
+
+  <div class="q-nav">
+    <button class="btn-back" id="btn-back" onclick="prevQuestion()">← 前の質問へ</button>
+  </div>
+</div>
+
+<div class="container screen" id="screen-result">
+  <div class="result-hero">
+    <p class="result-prelude" id="result-prelude"></p>
+    <h2 class="result-type" id="result-type-name"></h2>
+    <p class="result-tagline" id="result-tagline"></p>
+
+    <p class="character-message-top">あなたに重ね合わせるなら、こんなイメージかも♪</p>
+    <div class="character-display">
+      <p class="character-version" id="char-version-label"></p>
+      <div class="character-icon" id="char-icon"></div>
+      <p class="character-name" id="char-name"></p>
+      <p class="character-drama" id="char-drama"></p>
+    </div>
+
+    <p style="font-size:13px; opacity:0.7; margin-top:16px;">他のバージョンで見てみる ↓</p>
+    <div class="version-switcher" id="version-switcher"></div>
+  </div>
+
+  <div class="result-section">
+    <h3 id="section-description-title">📖 こんな人かもしれません</h3>
+    <p class="description" id="result-description"></p>
+  </div>
+
+  <div class="result-section">
+    <h3 id="section-shine-title">✨ 魅力ポイント</h3>
+    <ul class="shine-list" id="shine-list"></ul>
+  </div>
+
+  <div class="result-section">
+    <h3 id="section-activate-title">💡 強みの活かし方</h3>
+    <ul class="activate-list" id="activate-list"></ul>
+    <p class="activate-comment" id="activate-comment"></p>
+  </div>
+
+  <div class="result-section">
+    <h3 id="section-note-title">🌱 ちょっと気をつけたいこと</h3>
+    <ul class="note-list" id="note-list"></ul>
+  </div>
+
+  <div class="result-section">
+    <h3 id="section-message-title">💌 メッセージ</h3>
+    <div class="message-box">
+      <p id="result-message"></p>
+    </div>
+  </div>
+
+  <div class="share-section">
+    <h4>📣 この診断をシェアする</h4>
+    <div class="share-buttons">
+      <button class="share-btn share-x" onclick="shareX()">𝕏 でシェア</button>
+      <button class="share-btn share-line" onclick="shareLine()">LINEでシェア</button>
+      <button class="share-btn share-copy" id="copy-btn" onclick="copyUrl()">URLをコピー</button>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h3>もっと深く<br>知りたい方へ</h3>
+    <p>
+      診断結果を一緒に深掘りしながら、<br>
+      あなたの強みを活かす働き方や、<br>
+      これからのキャリアの可能性について、<br>
+      無料Zoom面談でお話ししましょう♪
+    </p>
+  </div>
+
+  <div class="line-cta">
+    <h3>無料Zoom面談のご予約は<br><span class="accent">公式LINEから</span></h3>
+    <p>
+      公式LINEにご登録いただくと、<br>
+      あやのと直接お話できるZoom面談を、<br>
+      希望者全員にご案内しています！
+    </p>
+    <p>
+      診断結果の詳しい内容や、<br>
+      さらに深掘りした内容をお話ししたり、<br>
+      「こんな働き方をしてみたい」<br>
+      「これからを変えたい」など、<br>
+      あなたの想いをじっくり聞かせてくださいね。<br>
+      一緒にワクワクする時間にしましょう ✨
+    </p>
+
+    <div class="line-benefits-inline">
+      <h4>Zoom面談参加者特典</h4>
+      <ul>
+        <li id="benefit-1">あなたの自己分析・詳細レポート完全版</li>
+        <li>30万円分『副業案件のヒント集』</li>
+      </ul>
+    </div>
+
+    <a href="#" class="btn btn-line btn-block" id="btn-line-register">LINEで友だち追加する</a>
+
+    <p class="line-note-inline">
+      ※ご登録後はいつでも解除できますのでご安心ください
+    </p>
+  </div>
+
+  <div class="retry-section">
+    <button class="btn btn-outline" onclick="resetAll()">🔄 もう一度診断する</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SHARE_URL = 'https://example.com/shindan';
+const STORAGE_KEY = 'shindan_result_v3';
+
+// アイコン画像は使用しません
+
+// ===== SVGアイコン定義 =====
+// 線画ベース、ソコスト風のシンプルなアイコン
+const ICON_COLOR = '#4A3C31';
+const ICON_ACCENT = '#F29C38';
+
+// SVGアイコンは使用しません
+
+// ===== バージョン定義 =====
+const VERSIONS = [
+  { key: 'jewel', label: '宝石', icon: '💎' },
+  { key: 'flower', label: '花', icon: '🌸' },
+  { key: 'animal', label: '動物', icon: '🐾' },
+  { key: 'color', label: 'カラー', icon: '🎨' },
+  { key: 'sazae', label: 'サザエさん', icon: '🐟' },
+  { key: 'drama', label: '平成ドラマ', icon: '📺' },
+  { key: 'ghibli', label: 'ジブリ', icon: '🌳' },
+  { key: 'shin', label: 'クレヨンしんちゃん', icon: '🖍️' },
+  { key: 'doraemon', label: 'ドラえもん', icon: '🔔' },
+  { key: 'maruko', label: 'ちびまる子ちゃん', icon: '🎀' }
+];
+
+const DRAMA_INFO = {
+  '半沢直樹': '半沢直樹', '花沢類': '花より男子', '道明寺司': '花より男子',
+  '津崎平匡': '逃げるは恥だが役に立つ', '森山みくり': '逃げるは恥だが役に立つ',
+  '葉山南': 'ロングバケーション', '牧野つくし': '花より男子',
+  '大前春子': 'ハケンの品格', '三田灯': '家政婦のミタ',
+  '夏井真琴': 'リッチマン・プアウーマン', '瀬名秀俊': 'ロングバケーション',
+  '日向徹': 'リッチマン・プアウーマン'
+};
+
+const TYPES = {
+  shinnen: {
+    name: '信念突破タイプ', tagline: 'まっすぐ切りひらく人',
+    catch: '自分の信じた道を、まっすぐに切りひらいていく人',
+    description: '「これだ！」と決めたら、最後までやり抜く強さを持っています。周りの意見に揺れることなく、自分の感覚を信じて前に進める芯の強さがありそうです。困難な状況にぶつかっても、すぐにあきらめず、自分なりの突破口を見つけて道を切りひらいていけるタイプではないでしょうか。リーダーシップを発揮する場面でも、自分の信念を貫けるからこそ、周りからの信頼を自然と集めていけそうです。',
+    shine: ['決めたことを最後までやり抜く、芯の強さ', '周りに流されない、自分軸を持っている', '困難にぶつかっても道を見つける突破力'],
+    activate: ['自分で決められる立場・関係性の中で、本来の力を発揮', '「これは私の」と言える領域を持つ瞬間に、最も輝けるかもしれません', 'ぶれない芯があるあなたは、誰かの「決めかねている背中」を押す存在になれるかも'],
+    activateComment: 'あなたの「やり抜く力」を、どんな形で活かせるかは人それぞれ。もし興味があれば、一緒に深掘りしませんか？',
+    note: ['頑張りすぎて、一人で抱え込んでしまう時はありませんか？', '「休む勇気」も大切にできると、もっと長く走れそうです'],
+    message: 'あなたの「やり抜く力」は、これからの人生で大きな財産になっていくのではないでしょうか。知らず知らずのうちに頑張りすぎてしまう日はありませんか？そんな時は、ふと立ち止まって、自分自身を労う時間を持ってみてくださいね。心地よく前に進める道が、きっと見つかっていきますように。',
+    chars: { jewel:'ダイヤモンド', flower:'蓮', animal:'オオカミ', color:'ゴールド', sazae:'波平', drama:'半沢直樹', ghibli:'サン', shin:'みさえ', doraemon:'先生', maruko:'お母さん' }
+  },
+  chouwa: {
+    name: '調和サポートタイプ', tagline: 'やさしく場を整える人',
+    catch: 'その場にいるだけで、空気がやわらかくなる人',
+    description: '場の空気を細やかに読み取り、その場にいる人たちが心地よく過ごせるよう、自然と気を配れる心を持っています。誰にでもやさしく接することができ、対立があったとしても穏やかに和らげる力をお持ちのようです。目立つタイプではないかもしれませんが、あなたがいなくなると寂しさを感じる人が多いのではないでしょうか。「縁の下の力持ち」として、周りの調和を生み出す大切な存在になれそうです。',
+    shine: ['場の空気を読み取る、細やかな繊細さ', '誰にでもやさしく接する温かさ', 'みんなが心地よく過ごせるよう整える力'],
+    activate: ['人を支える役割の中で、本来のやさしさが活きてきます', '対立や混乱を和らげる場面で、あなたならではの力を発揮できるのではないでしょうか？', '相手の話を「ただ聴く」だけで、相手の力になれる稀有な存在かも'],
+    activateComment: 'あなたの「整える力」を、どんな場で活かしていけるか。もし興味があれば、一緒に見つけていきましょう♪',
+    note: ['周りを優先しすぎて、自分の本音を後回しにしてしまう時もあるかもしれません', '「自分はどうしたい？」と問いかける時間も、大切にできるととても素敵です'],
+    message: 'あなたのやさしさは、周りの人にとっての大きな安心になっているのではないでしょうか。その優しさが自分自身にも向くよう、時々「私はどうしたい？」と問いかけてみてくださいね。自分を大切にする時間が、もっと豊かなあなたを育ててくれます。',
+    chars: { jewel:'パール', flower:'カスミソウ', animal:'犬', color:'白', sazae:'フネ', drama:'花沢類', ghibli:'シータ', shin:'シロ', doraemon:'のび太のパパ', maruko:'たまちゃん' }
+  },
+  jounetsu: {
+    name: '情熱リーダータイプ', tagline: '熱量でみんなを動かす人',
+    catch: 'あなたの熱が、まわりの人にエネルギーを届ける人',
+    description: '強いエネルギーと情熱で、周りを巻き込みながら前進できる人です。普段から「やってみよう！」「面白そう！」という気持ちが周りに伝わり、自然と仲間が集まってくるタイプではないでしょうか。一人で達成するより、みんなで何かを成し遂げる達成感を何より大切にしているのでしょう。周りを明るくする太陽のような存在で、あなたがいるだけで場の空気が前向きになることが多いようです。',
+    shine: ['人を惹きつけるエネルギー', '「やってみよう！」と背中を押す力', '仲間と一緒に成し遂げる達成感を大切にできる'],
+    activate: ['人と関わる立場の中で、あなたの熱量が最も活きてきます', '「みんなで何かを始める」瞬間に、最も輝けるのではないでしょうか', 'あなたの「面白そう！」の一言が、誰かの人生を動かす力になれるかも'],
+    activateComment: 'あなたの「熱量」を、どんな形で世の中に届けていくか。もし興味があれば、一緒に深めていきましょう♪',
+    note: ['熱量が高い分、ペースが合わない人もいるかもしれません', '時には一歩引いて、相手のペースに合わせてみるのもよさそうです'],
+    message: 'あなたの情熱は、人を動かす力を持っているのではないでしょうか。ただ、その熱さに自分が燃え尽きないよう、適度にクールダウンする時間も大切にできるとより素敵です。あなたが元気でいてこそ、周りも元気になれるはず。自分のエネルギーも、しっかり満たしてあげてくださいね。',
+    chars: { jewel:'ルビー', flower:'ひまわり', animal:'ライオン', color:'赤', sazae:'サザエ', drama:'道明寺司', ghibli:'パズー', shin:'ネネちゃん', doraemon:'ジャイアン', maruko:'はまじ' }
+  },
+  reisei: {
+    name: '冷静分析タイプ', tagline: 'クールに本質を見抜く人',
+    catch: '物事の本質をすっと見抜く、知性の人',
+    description: '感情に流されず、冷静に物事を判断できる人です。複雑な情報を整理して理解する頭の良さがあり、的確なアドバイスができる視点をお持ちのようです。周りの人から見ると「言われてみればそうだ」と気づきを与えられることが多いのではないでしょうか。表面的な部分ではなく、物事の本質を見抜く目があるので、相談役として頼られることも多そうです。',
+    shine: ['感情に流されず、冷静に判断できる力', '複雑な情報を整理して理解する頭の良さ', '的確なアドバイスができる視点'],
+    activate: ['情報を扱う立場の中で、あなたの分析力が活きてきます', '誰かが「混乱している」場面で、あなたの整理力が光るのではないでしょうか', '本質を見抜く目があるあなたは、人の「気づきの種」を蒔ける存在になれるかも'],
+    activateComment: 'あなたの「見抜く力」を、どんな形で価値に変えていくか。もし興味があれば、一緒に考えていきましょう♪',
+    note: ['考えすぎて、行動が遅れてしまう時もあるかもしれません', '時には「えいっ」と直感で動くのも、新しい景色を見せてくれそうです'],
+    message: 'あなたの冷静な視点は、周りの人にとって信頼できる「灯台」のような存在になっているのではないでしょうか。考えすぎて動けない時もあるかもしれません。完璧を求めすぎず、「まずは小さく一歩」を意識してみると、新しい景色が見えてきそうです。',
+    chars: { jewel:'サファイア', flower:'ユリ', animal:'フクロウ', color:'青', sazae:'ワカメ', drama:'津崎平匡', ghibli:'アリエッティ', shin:'風間くん', doraemon:'ドラミちゃん', maruko:'お姉ちゃん' }
+  },
+  iyashi: {
+    name: '癒し育成タイプ', tagline: 'あたたかく人を育てる人',
+    catch: 'そばにいる人を、ふんわり育てていく人',
+    description: '相手のペースに合わせる包容力と、小さな成長に気づける優しい眼差しを持っている人です。安心感を与える温かさで、周りの人がのびのびと自分らしさを発揮できる場を作れるタイプなのでは？「あなたといると安心する」と言われることが多いのもこのタイプの特徴です！お母さんのような大きな愛で、人や物事を育てていく力を発揮できる場所があるかもしれません！',
+    shine: ['相手のペースに合わせる包容力', '小さな成長に気づける優しい眼差し', '安心感を与える温かさ'],
+    activate: ['人を育てる役割の中で、あなたの愛情が活きてきそうです', '「相手の小さな変化」に気づける瞬間に、最も力を発揮できるのではないでしょうか', '安心感のある場を作れるあなたは、誰かの「心のホーム」になれる存在かも'],
+    activateComment: 'あなたの「育てる力」を、どんな形で世の中に届けていくか。もし興味があれば、一緒に深めていきましょう♪',
+    note: ['与えすぎて、自分が空っぽになってしまう時もあるかもしれません', '自分自身も大切にケアしてあげる時間を持てると、もっと豊かになれそうです'],
+    message: 'あなたの温かさで、たくさんの人が癒され、成長していくのではないでしょうか。その優しさが自分自身にも届くよう、自分を労うことを忘れないでくださいね。自分を満たすことができる人だけが、人を本当に満たすことができるのかもしれません。',
+    chars: { jewel:'エメラルド', flower:'ラベンダー', animal:'パンダ', color:'緑', sazae:'タラちゃん', drama:'森山みくり', ghibli:'ナウシカ', shin:'園長先生', doraemon:'ドラえもん', maruko:'おじいちゃん／友蔵' }
+  },
+  kansei: {
+    name: '感性表現タイプ', tagline: 'センスで世界を彩る人',
+    catch: 'あなたの感性で、まわりの世界を少し素敵にする人',
+    description: '独自のセンスと美意識を持っていて、「素敵」を見つけ出す感度の高さがある人です。表現することで人を魅了する力もお持ちで、自分らしい世界観を持っているのが大きな魅力ではないでしょうか。「あなたの選ぶモノは、なにか素敵」「センスがいいよね」と言われることが多そうです。日常の小さな美しさに気づけるのも、あなたならではの素晴らしい才能でしょう。',
+    shine: ['独自のセンスと美意識', '「素敵」を見つけ出す感度の高さ', '表現することで人を魅了する力'],
+    activate: ['センスを発揮できる場の中で、あなたの本来の力が花開きそうです', '「美しさを表現する」瞬間に、最も輝けるのではないでしょうか', '感性を信じて動けるあなたは、誰かの「美しい」を発見する存在になれるかも'],
+    activateComment: 'あなたの「感性」を、どんな形で世の中に届けていくか。もし興味があれば、一緒に見つけていきましょう♪',
+    note: ['気分の波で動きが変わってしまう時もあるかもしれません', '自分のリズムを大切にしながら、続けることもプラスになりそうです'],
+    message: 'あなたの感性は、世界をもう少し素敵にする力を持っているのではないでしょうか。気分の波があるのも個性の一つ。無理に一定でいようとせず、その時のあなたを楽しんでみてくださいね。あなたが感じる「美しさ」が、誰かの心を動かす日がきっと来そうです。',
+    chars: { jewel:'アメジスト', flower:'バラ', animal:'猫', color:'紫', sazae:'イクラ', drama:'葉山南', ghibli:'月島雫', shin:'まつざか先生', doraemon:'ジャイ子', maruko:'花輪くん' }
+  },
+  kikaku: {
+    name: '企画発想タイプ', tagline: 'ひらめきで場を動かす人',
+    catch: 'ひらめき一つで、場の流れを変える人',
+    description: '次々と湧いてくるアイデアと、場を盛り上げるエネルギーを持っている人です。「面白そう！」を行動に変える力があり、新しいことを生み出すワクワク感を周りに伝染させられるタイプではないでしょうか。「アイデアマンだね」「いつも何か考えてるよね」と言われることが多いのでは？周りの人を巻き込みながら、楽しいことを作り出す才能をお持ちの方が多いのもこのタイプの特徴です。',
+    shine: ['次々と湧いてくるアイデア', '場を盛り上げるエネルギー', '「面白そう！」を行動に変える力'],
+    activate: ['新しいことを生み出す場面で、あなたの本来の力が活きてきそうです', '「ゼロから何かを始める」瞬間に、最も輝けるのではないでしょうか', 'ひらめきを形にできるあなたは、誰かの「楽しい」を作り出せる存在かも'],
+    activateComment: 'あなたの「アイデア」を、どんな形で世の中に届けていくか。もし興味があれば、一緒に深めていきましょう♪',
+    note: ['飽きっぽさが出てしまう時もあるかもしれません', '「これは続ける」と決めたものを一つ持つと、もっと強くなれそうです'],
+    message: 'あなたのひらめきは、誰にも真似できない宝物ではないでしょうか。すべてを形にしようとすると疲れてしまうかも。「これは絶対やる」と決めたものを一つだけ持って、まずはそれを育ててみてくださいね。一つ続けた経験が、あなたの自信になっていきます。',
+    chars: { jewel:'トパーズ', flower:'ガーベラ', animal:'キツネ', color:'黄', sazae:'カツオ', drama:'牧野つくし', ghibli:'ソフィー', shin:'しんのすけ', doraemon:'セワシくん', maruko:'まる子' }
+  },
+  jiyuu: {
+    name: '自由変化タイプ', tagline: '軽やかに変化を楽しむ人',
+    catch: '変化さえも楽しめる、しなやかさを持っている人',
+    description: 'どんな環境にも順応する柔軟さと、新しいことを楽しむ好奇心を持っている人です。軽やかに前へ進む明るさで、変化を恐れずに人生を楽しめる、風のような自由な存在のタイプではないでしょうか。「フットワーク軽いよね」「いろんなこと経験してるね」と言われることが多そうです。一つの場所に留まるより、いろんな世界を見て成長していくのが自然なあなたなのかもしれません。',
+    shine: ['どんな環境にも順応する柔軟さ', '新しいことを楽しむ好奇心', '軽やかに前へ進む明るさ'],
+    activate: ['自由に変化できる環境の中で、あなたの本来の力が活きてきそうです', '「新しい世界に飛び込む」瞬間に、最も輝けるのではないでしょうか', 'いろんな世界を知っているあなたは、誰かの「視野を広げる」存在になれるかも'],
+    activateComment: 'あなたの「自由さ」を、どんな形で価値に変えていくか。もし興味があれば、一緒に見つけていきましょう♪',
+    note: ['自由すぎて、根を張る前に動いてしまう時もあるかもしれません', '「ここは続ける」という軸を一つ持つと、もっと安心して動けそうです'],
+    message: 'あなたの自由さは、これからの時代にぴったりの強みになっていくのではないでしょうか。自由すぎると疲れてしまう時もあるかも。「ここは大切」と思える場所や人を、一つだけ大事にしてみてくださいね。それがあなたの「帰る場所」になって、もっと軽やかに動けるようになりそうです。',
+    chars: { jewel:'オパール', flower:'紫陽花', animal:'馬', color:'オレンジ', sazae:'ノリスケ', drama:'大前春子', ghibli:'ハル', shin:'ひまわり', doraemon:'スネ夫', maruko:'お父さん／ヒロシ' }
+  },
+  doryoku: {
+    name: '努力継続タイプ', tagline: 'コツコツ実らせる人',
+    catch: '地道な一歩を積み重ねて、大きな実りを生む人',
+    description: '一度決めたことを続ける継続力と、焦らず自分のペースで進む安定感を持っている人です。小さな積み重ねを大切にする誠実さで、時間をかけて確実に成果を出せるタイプではないでしょうか。派手さはないかもしれませんが、「あの人なら任せられる」と信頼を積み上げられるのがあなたの大きな魅力でしょう。コツコツ続けてきたことが、いつか大きな実りとなって返ってくる、そんな生き方ができそうです。',
+    shine: ['一度決めたことを続ける継続力', '焦らず、自分のペースで進む安定感', '小さな積み重ねを大切にする誠実さ'],
+    activate: ['コツコツ積み上げられる場の中で、あなたの本来の力が活きてきそうです', '「時間をかけて何かを育てる」場面に、最も力を発揮できるのではないでしょうか', '誠実な積み重ねができるあなたは、信頼の貯金を積み上げていける存在かも'],
+    activateComment: 'あなたの「続ける力」を、どんな形で実らせていくか。もし興味があれば、一緒に深めていきましょう♪',
+    note: ['慎重すぎて、チャンスを逃してしまう時もあるかもしれません', '時には「思い切って」が、ブレイクスルーになりそうです'],
+    message: 'あなたの誠実な努力は、必ず誰かが見てくれているのではないでしょうか。すぐに結果が出なくても、焦らないでくださいね。あなたが積み重ねてきた一日一日が、いつか振り返った時に「ここまで来た」と思える日が来そうです。コツコツの先に、あなただけの景色が広がっていますように。',
+    chars: { jewel:'ガーネット', flower:'椿', animal:'リス', color:'グレー', sazae:'中島', drama:'三田灯', ghibli:'キキ', shin:'ひろし', doraemon:'のび太のママ', maruko:'丸尾くん' }
+  },
+  taiwa: {
+    name: '対話調整タイプ', tagline: '人と人をつなぐ聞き上手',
+    catch: '人と人の間に立って、橋をかける役割が似合う人',
+    description: '相手の話を引き出す聞き上手と、違う立場の人をつなぐ調整力を持っている人です。信頼関係を築く誠実さで、人と人の間に立って物事を円滑に進められるタイプではないでしょうか。「あなたといると話しやすい」「相談しやすい」と言われることが多いのでは？相手の話をただ聴くだけで、相手の気持ちが整理されていく、そんな不思議な力をお持ちのようです。',
+    shine: ['相手の話を引き出す聞き上手', '違う立場の人をつなぐ調整力', '信頼関係を築く誠実さ'],
+    activate: ['人と人の間に立つ役割の中で、あなたの本来の力が活きてきそうです', '「誰かと誰かをつなぐ」瞬間に、最も力を発揮できるのではないでしょうか', '聴く力があるあなたは、誰かの「心の整理役」になれる稀有な存在かも'],
+    activateComment: 'あなたの「聴く力」を、どんな形で価値に変えていくか。もし興味があれば、一緒に見つけていきましょう♪',
+    note: ['板挟みになって疲れてしまう時もあるかもしれません', '「自分の意見」もちゃんと伝える勇気を持てると、もっと楽になれそうです'],
+    message: 'あなたの「聴く力」は、本当に貴重な才能ではないでしょうか。多くの人があなたに救われているのかもしれません。人の話を聴きすぎて自分が疲れる時は、しっかり一人の時間を取ってくださいね。あなた自身の声にも、耳を傾けてあげる時間を持てると素敵です。',
+    chars: { jewel:'アクアマリン', flower:'コスモス', animal:'イルカ', color:'水色', sazae:'マスオ', drama:'夏井真琴', ghibli:'千尋', shin:'よしなが先生', doraemon:'しずかちゃん', maruko:'藤木くん' }
+  },
+  sensai: {
+    name: '繊細内省タイプ', tagline: '深く感じて自分を見つめる人',
+    catch: '人より深く感じる感性を持っている人',
+    description: '物事を深く感じ取る繊細さと、自分の内面と向き合う誠実さを持っている人です。表面ではなく本質を見る目があり、人の気持ちや物事の機微を捉えるのが得意なタイプではないでしょうか。一人で考える時間がエネルギーの源になっていて、その深い思考から生まれる言葉や作品が、誰かの心を動かすこともありそうです。HSP(繊細さん)の傾向がある方が多いのもこのタイプの特徴です。',
+    shine: ['物事を深く感じ取る繊細さ', '自分の内面と向き合う誠実さ', '表面ではなく本質を見る目'],
+    activate: ['感性を活かせる場の中で、あなたの本来の力が花開きそうです', '「深く考えたこと」を表現する瞬間に、最も輝けるのではないでしょうか', '本質を見る目があるあなたは、誰かに「気づきの種」を渡せる存在かも'],
+    activateComment: 'あなたの「感じる力」を、どんな形で世の中に届けていくか。もし興味があれば、一緒に深めていきましょう♪',
+    note: ['考えすぎて、エネルギーを消耗してしまう時もあるかもしれません', '「感じすぎる自分」も含めて愛してあげる時間を持てるともっと素敵です'],
+    message: 'あなたの深い感性は、誰にも真似できない宝物ではないでしょうか。感じすぎて疲れる日があっても、それはあなたが豊かに生きている証拠かもしれません。一人になる時間をちゃんと取って、自分の心に栄養を与えてあげてくださいね。あなたが感じたことを、世界は求めているのかもしれません。',
+    chars: { jewel:'ムーンストーン', flower:'桜', animal:'うさぎ', color:'ピンク', sazae:'タイコ', drama:'瀬名秀俊', ghibli:'杏奈', shin:'マサオくん', doraemon:'のび太', maruko:'永沢くん' }
+  },
+  tankyu: {
+    name: '探究専門タイプ', tagline: '好きなことをとことん極める人',
+    catch: '好きなことに没頭する時間が、何よりの幸せな人',
+    description: '一つのことを深く掘り下げる集中力と、専門性を積み上げる粘り強さを持っている人です。自分の世界を持つ豊かさで、好きなことに没頭する時間を何より大切にする、職人気質のタイプではないでしょうか。「あの人はあの分野詳しいよね」と一目置かれる存在になりやすく、ニッチな分野でも極めることで、唯一無二の存在になれる力をお持ちのようです。',
+    shine: ['一つのことを深く掘り下げる集中力', '専門性を積み上げる粘り強さ', '自分の世界を持つ豊かさ'],
+    activate: ['専門性を深められる場の中で、あなたの本来の力が活きてきそうです', '「好きを極める」瞬間に、最も輝けるのではないでしょうか', '深く掘り下げられるあなたは、唯一無二の存在になれる可能性を秘めているかも'],
+    activateComment: 'あなたの「極める力」を、どんな形で価値に変えていくか。もし興味があれば、一緒に見つけていきましょう♪',
+    note: ['没頭しすぎて、周りが見えなくなってしまう時もあるかもしれません', '時々、外の世界の風を取り入れる時間も持てるとより素敵です'],
+    message: 'あなたの「好きを極める力」は、これからの時代にとても価値があるのではないでしょうか。好きなことに没頭できるのは誰もが羨む才能です。たまには外の世界とつながる時間も大切に。あなたの専門性を、必要としている人がきっとどこかにいるはずです。',
+    chars: { jewel:'ラピスラズリ', flower:'チューリップ', animal:'ペンギン', color:'黒', sazae:'花沢さん', drama:'日向徹', ghibli:'フィオ', shin:'ボーちゃん', doraemon:'出木杉くん', maruko:'野口さん' }
+  }
+};
+
+const QUESTIONS = [
+  { text: 'Q1. 新しい一週間が始まる月曜日の朝、あなたの気分は？', options: [
+    { text: 'やるぞ！と気合が入る', scores: { action: 2 } },
+    { text: '今週はどんな素敵なことしよう♪と想像が膨らむ', scores: { express: 2 } },
+    { text: '今週の予定を整理して、計画を立てる', scores: { think: 2 } },
+    { text: '家族や周りの人のことを考える', scores: { grow: 2 } },
+    { text: 'その時の気分次第', scores: { express: 1, jiyuu_hint: 1 } }
+  ]},
+  { text: 'Q2. 友達と旅行の計画を立てるとき、あなたの役割は？', options: [
+    { text: '「行きたい！」と最初に言い出す人', scores: { action: 2 } },
+    { text: 'インスタ映えするお店や絶景スポットを見つける人', scores: { express: 2 } },
+    { text: '予算とスケジュールを綿密に組む人', scores: { think: 2 } },
+    { text: 'みんなの希望をまとめて調整する人', scores: { grow: 2, taiwa_hint: 1 } }
+  ]},
+  { text: 'Q3. トラブルが起きたとき、まず何をしますか？', options: [
+    { text: 'すぐに動いて解決しようとする', scores: { action: 2 } },
+    { text: '自分の気持ちに正直に向き合う', scores: { express: 1, think: 1 } },
+    { text: '冷静に状況を分析する', scores: { think: 2 } },
+    { text: '周りの人が大丈夫か確認する', scores: { grow: 2 } }
+  ]},
+  { text: 'Q4. 学生時代、こんなタイプだったかも？', options: [
+    { text: 'クラスの中心で、何かに挑戦してた', scores: { action: 2 } },
+    { text: '絵や音楽、ファッションが好きだった', scores: { express: 2 } },
+    { text: '本や勉強が好きで、よく観察してた', scores: { think: 2, tankyu_hint: 1 } },
+    { text: '友達の相談に乗ることが多かった', scores: { grow: 2, taiwa_hint: 1 } }
+  ]},
+  { text: 'Q5. 「これだけは譲れない！」というあなたのこだわりは？', options: [
+    { text: '自分で決めたことは最後までやり通す', scores: { action: 2 } },
+    { text: 'センスや美意識を大事にしたい', scores: { express: 2 } },
+    { text: '納得できないことはしたくない', scores: { think: 2 } },
+    { text: '大切な人を大事にしたい', scores: { grow: 2 } }
+  ]},
+  { text: 'Q6. 仕事や家事で疲れたとき、回復するのは？', options: [
+    { text: '体を動かしたり、新しい場所に行く', scores: { action: 2, jiyuu_hint: 1 } },
+    { text: '好きな音楽や映画、おしゃれな空間に浸る', scores: { express: 2 } },
+    { text: '一人で静かに考える時間', scores: { think: 2, tankyu_hint: 1 } },
+    { text: '家族や友達と過ごす時間', scores: { grow: 2 } }
+  ]},
+  { text: 'Q7. 大切な人から「相談があるんだけど」と言われたら？', options: [
+    { text: '「よし、一緒に解決しよう！」と動く', scores: { action: 1, grow: 1 } },
+    { text: '「どんな気持ちなの？」と寄り添う', scores: { grow: 2 } },
+    { text: '状況を整理して、選択肢を一緒に考える', scores: { think: 2, taiwa_hint: 1 } },
+    { text: 'まずはじっくり話を聴く', scores: { grow: 1, think: 1, taiwa_hint: 2 } }
+  ]},
+  { text: 'Q8. お買い物に行ったとき、あなたの選び方は？', options: [
+    { text: '直感で「これ！」と決める', scores: { action: 1, express: 1, jiyuu_hint: 1 } },
+    { text: '見た目やデザインで選ぶ', scores: { express: 2 } },
+    { text: '口コミやスペックを比較して決める', scores: { think: 2, tankyu_hint: 1 } },
+    { text: '家族が喜びそうなものを選ぶ', scores: { grow: 2 } }
+  ]},
+  { text: 'Q9. 「自分のやりたいこと」と「周りの期待」、どちらを優先する？', options: [
+    { text: '自分のやりたいことを優先', scores: { self: 2 } },
+    { text: 'バランスを取りながら、目の前の人を大切に', scores: { relation: 2 } },
+    { text: '場の空気を見て、全体が良くなるように', scores: { field: 2 } }
+  ]},
+  { text: 'Q10. パーティーや集まりで、自然と取るポジションは？', options: [
+    { text: '自分のペースで楽しむ', scores: { self: 2 } },
+    { text: '隣の人とじっくり話す', scores: { relation: 2, taiwa_hint: 1 } },
+    { text: 'みんなが楽しめるよう気を配る', scores: { field: 2 } }
+  ]},
+  { text: 'Q11. SNSやブログで発信するとき、意識するのは？', options: [
+    { text: '自分の表現したいこと', scores: { self: 2 } },
+    { text: '特定の誰かに届くように', scores: { relation: 2 } },
+    { text: '読んでくれる人みんなが共感できるように', scores: { field: 2 } }
+  ]},
+  { text: 'Q12. 新しいグループに入ったとき、まずすることは？', options: [
+    { text: '自分らしさを大切にして、無理に合わせない', scores: { self: 2 } },
+    { text: '仲良くなれそうな人を見つける', scores: { relation: 2 } },
+    { text: '全体の雰囲気を観察する', scores: { field: 2 } }
+  ]},
+  { text: 'Q13. 大切にしている価値観に近いのは？', options: [
+    { text: '「自分らしさ」「個性」「信念」', scores: { self: 2 } },
+    { text: '「絆」「思いやり」「信頼」', scores: { relation: 2 } },
+    { text: '「調和」「平和」「みんなの幸せ」', scores: { field: 2 } }
+  ]},
+  { text: 'Q14. 仕事を選ぶときの基準は？', options: [
+    { text: '自分の好きなこと・得意なことができる', scores: { self: 2, tankyu_hint: 1 } },
+    { text: '大切な人を支えられる', scores: { relation: 2 } },
+    { text: '社会や周りの役に立てる', scores: { field: 2 } }
+  ]},
+  { text: 'Q15. あなたが「1番の強み」だと思うのは？', options: [
+    { text: '行動力・突破力', scores: { action: 1, self: 1 } },
+    { text: '共感力・優しさ', scores: { grow: 1, relation: 1 } },
+    { text: '分析力・冷静さ', scores: { think: 1, self: 1 } },
+    { text: 'センス・感性', scores: { express: 1, self: 1 } },
+    { text: 'まとめ力・調整力', scores: { grow: 1, field: 1, taiwa_hint: 2 } },
+    { text: 'ひらめき・発想力', scores: { action: 1, field: 1 } }
+  ]},
+  { text: 'Q16. 周りの人からよく言われるあなたの特徴は？', options: [
+    { text: '「行動が早いね」「リーダーっぽい」', scores: { action: 1, self: 1 } },
+    { text: '「優しいね」「話しやすい」', scores: { grow: 1, relation: 1, taiwa_hint: 1 } },
+    { text: '「しっかりしてるね」「頼りになる」', scores: { think: 1, self: 1 } },
+    { text: '「センスがいいね」「おしゃれ」', scores: { express: 1, self: 1 } },
+    { text: '「いい人」「縁の下の力持ち」', scores: { grow: 1, field: 1 } },
+    { text: '「面白いね」「アイデアマン」', scores: { action: 1, field: 1 } }
+  ]},
+  { text: 'Q17. あなたのワクワクする未来は、どんなイメージ？', options: [
+    { text: '自分の信じる道を突き進んでいる', scores: { action: 1, self: 1 } },
+    { text: '大切な人たちと笑顔で過ごしている', scores: { grow: 1, relation: 1 } },
+    { text: '専門性を活かして活躍している', scores: { think: 1, self: 1, tankyu_hint: 2 } },
+    { text: '自分のセンスで何かを生み出している', scores: { express: 1, self: 1 } },
+    { text: 'みんなが集う場を作っている', scores: { grow: 1, field: 1 } },
+    { text: '新しいことに次々挑戦している', scores: { action: 1, field: 1, jiyuu_hint: 2 } }
+  ]}
+];
+
+let state = {
+  profile: { name: '', birthday: null, age: null, gender: '' },
+  selectedVersion: null,
+  currentQuestionIndex: 0,
+  answers: [],
+  resultType: null,
+  displayVersion: null
+};
+
+function initDateSelectors() {
+  const yearSelect = document.getElementById('input-year');
+  const monthSelect = document.getElementById('input-month');
+  const daySelect = document.getElementById('input-day');
+
+  const currentYear = new Date().getFullYear();
+  for (let y = currentYear - 10; y >= currentYear - 100; y--) {
+    const opt = document.createElement('option');
+    opt.value = y;
+    opt.textContent = y + '年';
+    yearSelect.appendChild(opt);
+  }
+  for (let m = 1; m <= 12; m++) {
+    const opt = document.createElement('option');
+    opt.value = m;
+    opt.textContent = m + '月';
+    monthSelect.appendChild(opt);
+  }
+  for (let d = 1; d <= 31; d++) {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = d + '日';
+    daySelect.appendChild(opt);
+  }
+}
+
+function calculateAge(year, month, day) {
+  const today = new Date();
+  let age = today.getFullYear() - year;
+  const m = today.getMonth() + 1 - month;
+  if (m < 0 || (m === 0 && today.getDate() < day)) age--;
+  return age;
+}
+
+function saveResultToStorage() {
+  try {
+    const data = {
+      profile: state.profile, resultType: state.resultType,
+      displayVersion: state.displayVersion, selectedVersion: state.selectedVersion,
+      answers: state.answers, timestamp: Date.now()
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (e) {}
+}
+
+function clearStorage() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToProfileForm() {
+  showScreen('screen-profile');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initDateSelectors();
+  document.querySelectorAll('.gender-option').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.gender-option').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.profile.gender = btn.dataset.gender;
+      document.getElementById('error-gender').classList.remove('show');
+    });
+  });
+});
+
+function submitProfile() {
+  const name = document.getElementById('input-name').value.trim();
+  const year = document.getElementById('input-year').value;
+  const month = document.getElementById('input-month').value;
+  const day = document.getElementById('input-day').value;
+  const gender = state.profile.gender;
+
+  document.getElementById('error-name').classList.remove('show');
+  document.getElementById('error-birthday').classList.remove('show');
+  document.getElementById('error-gender').classList.remove('show');
+
+  let hasError = false;
+  if (!name) { document.getElementById('error-name').classList.add('show'); hasError = true; }
+  if (!year || !month || !day) { document.getElementById('error-birthday').classList.add('show'); hasError = true; }
+  if (!gender) { document.getElementById('error-gender').classList.add('show'); hasError = true; }
+
+  if (hasError) return;
+
+  state.profile.name = name;
+  state.profile.birthday = year + '-' + String(month).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+  state.profile.age = calculateAge(parseInt(year), parseInt(month), parseInt(day));
+
+  renderVersionGrid();
+  showScreen('screen-version');
+}
+
+function renderVersionGrid() {
+  const grid = document.getElementById('version-grid');
+  grid.innerHTML = '';
+  VERSIONS.forEach(v => {
+    const card = document.createElement('div');
+    card.className = 'version-card';
+    card.innerHTML = '<span class="icon">' + v.icon + '</span>' + v.label;
+    card.onclick = () => {
+      document.querySelectorAll('.version-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      state.selectedVersion = v.key;
+      state.displayVersion = v.key;
+      const btn = document.getElementById('version-next-btn');
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.style.cursor = 'pointer';
+    };
+    grid.appendChild(card);
+  });
+}
+
+function startQuestions() {
+  state.currentQuestionIndex = 0;
+  state.answers = [];
+  renderQuestion();
+  showScreen('screen-question');
+}
+
+function getEncourageText(idx) {
+  if (idx <= 4) return 'いいスタートです♪';
+  if (idx <= 9) return '半分まで来ましたよ ✨';
+  if (idx <= 13) return 'もう少しです！';
+  return 'あと少し！ラストスパート 🌷';
+}
+
+function renderQuestion() {
+  const idx = state.currentQuestionIndex;
+  const q = QUESTIONS[idx];
+
+  document.getElementById('question-text').textContent = q.text;
+  document.getElementById('progress-text').textContent = 'Question ' + (idx + 1) + ' / ' + QUESTIONS.length;
+  document.getElementById('encourage-text').textContent = getEncourageText(idx);
+  document.getElementById('progress-fill').style.width = ((idx) / QUESTIONS.length) * 100 + '%';
+
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = opt.text;
+    if (state.answers[idx] === i) btn.classList.add('selected');
+    btn.onclick = () => selectOption(i);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('btn-back').disabled = (idx === 0);
+}
+
+function selectOption(optIdx) {
+  state.answers[state.currentQuestionIndex] = optIdx;
+  document.querySelectorAll('.option').forEach((b, i) => {
+    if (i === optIdx) b.classList.add('selected');
+    else b.classList.remove('selected');
+  });
+
+  setTimeout(() => {
+    if (state.currentQuestionIndex < QUESTIONS.length - 1) {
+      state.currentQuestionIndex++;
+      renderQuestion();
+    } else {
+      document.getElementById('progress-fill').style.width = '100%';
+      setTimeout(() => goToResult(), 400);
+    }
+  }, 350);
+}
+
+function prevQuestion() {
+  if (state.currentQuestionIndex > 0) {
+    state.currentQuestionIndex--;
+    renderQuestion();
+  }
+}
+
+function goToResult() {
+  state.resultType = calculateResult();
+  saveResultToStorage();
+  renderResult();
+  showScreen('screen-result');
+}
+
+function calculateResult() {
+  const scores = {
+    action: 0, express: 0, think: 0, grow: 0,
+    self: 0, relation: 0, field: 0,
+    taiwa_hint: 0, tankyu_hint: 0, jiyuu_hint: 0
+  };
+
+  state.answers.forEach((optIdx, qIdx) => {
+    if (optIdx === undefined) return;
+    const opt = QUESTIONS[qIdx].options[optIdx];
+    Object.entries(opt.scores).forEach(([key, val]) => {
+      scores[key] = (scores[key] || 0) + val;
+    });
+  });
+
+  const moveOrder = ['action', 'express', 'think', 'grow'];
+  const energyOrder = ['self', 'relation', 'field'];
+
+  let topMove = moveOrder.reduce((a, b) => scores[a] >= scores[b] ? a : b);
+  let topEnergy = energyOrder.reduce((a, b) => scores[a] >= scores[b] ? a : b);
+
+  const mapping = {
+    'action-self': 'shinnen', 'action-relation': 'jounetsu', 'action-field': 'kikaku',
+    'express-self': 'kansei', 'express-relation': 'kansei', 'express-field': 'jiyuu',
+    'think-self': 'reisei', 'think-relation': 'sensai', 'think-field': 'tankyu',
+    'grow-self': 'doryoku', 'grow-relation': 'iyashi', 'grow-field': 'chouwa'
+  };
+
+  let resultKey = mapping[topMove + '-' + topEnergy];
+
+  if (topMove === 'grow' && topEnergy === 'relation' && scores.taiwa_hint >= 3) resultKey = 'taiwa';
+  if (topMove === 'think' && scores.tankyu_hint >= 4) resultKey = 'tankyu';
+  if (scores.jiyuu_hint >= 4 && (topMove === 'express' || topMove === 'action')) {
+    if (topEnergy === 'field' || scores.field >= 4) resultKey = 'jiyuu';
+  }
+
+  return resultKey;
+}
+
+function renderResult() {
+  const type = TYPES[state.resultType];
+  if (!type) return;
+
+  const name = state.profile.name || 'あなた';
+  const nameWithSan = state.profile.name ? state.profile.name + 'さん' : 'あなた';
+
+  document.getElementById('result-prelude').textContent = nameWithSan + 'のタイプは…';
+  document.getElementById('result-type-name').textContent = type.name;
+  document.getElementById('result-tagline').textContent = type.catch;
+  document.getElementById('result-description').textContent = type.description;
+  document.getElementById('result-message').textContent = type.message;
+
+  // セクションタイトルに名前を反映
+  document.getElementById('section-description-title').innerHTML = '📖 ' + nameWithSan + 'はこんな人かもしれません';
+  document.getElementById('section-shine-title').innerHTML = '✨ ' + nameWithSan + 'の魅力ポイント';
+  document.getElementById('section-activate-title').innerHTML = '💡 ' + nameWithSan + 'の強みの活かし方';
+  document.getElementById('section-note-title').innerHTML = '🌱 ' + nameWithSan + 'がちょっと気をつけたいこと';
+  document.getElementById('section-message-title').innerHTML = '💌 ' + nameWithSan + 'へのメッセージ';
+
+  // LINE特典の1つ目にも名前を反映
+  const benefitElem = document.getElementById('benefit-1');
+  if (benefitElem) {
+    benefitElem.textContent = nameWithSan + 'の自己分析・詳細レポート完全版';
+  }
+
+  const shineList = document.getElementById('shine-list');
+  shineList.innerHTML = '';
+  type.shine.forEach(s => {
+    const li = document.createElement('li');
+    li.textContent = s;
+    shineList.appendChild(li);
+  });
+
+  const activateList = document.getElementById('activate-list');
+  activateList.innerHTML = '';
+  type.activate.forEach(a => {
+    const li = document.createElement('li');
+    li.textContent = a;
+    activateList.appendChild(li);
+  });
+
+  // 引き込みコメントを表示
+  if (type.activateComment) {
+    document.getElementById('activate-comment').textContent = type.activateComment;
+  }
+
+  const noteList = document.getElementById('note-list');
+  noteList.innerHTML = '';
+  type.note.forEach(n => {
+    const li = document.createElement('li');
+    li.textContent = n;
+    noteList.appendChild(li);
+  });
+
+  renderCharacter();
+  renderVersionSwitcher();
+}
+
+function renderCharacter() {
+  const type = TYPES[state.resultType];
+  const v = state.displayVersion;
+  const versionInfo = VERSIONS.find(x => x.key === v);
+  const charName = type.chars[v];
+
+  document.getElementById('char-version-label').textContent = versionInfo.icon + ' ' + versionInfo.label + 'バージョン';
+  document.getElementById('char-name').textContent = charName;
+
+  // 絵文字を表示
+  const iconElem = document.getElementById('char-icon');
+  iconElem.innerHTML = '<div class="character-emoji-large">' + versionInfo.icon + '</div>';
+
+  const dramaElem = document.getElementById('char-drama');
+  if (v === 'drama' && DRAMA_INFO[charName]) {
+    dramaElem.textContent = '〜 ' + DRAMA_INFO[charName] + ' 〜';
+    dramaElem.style.display = 'block';
+  } else {
+    dramaElem.textContent = '';
+    dramaElem.style.display = 'none';
+  }
+}
+
+function renderVersionSwitcher() {
+  const switcher = document.getElementById('version-switcher');
+  switcher.innerHTML = '';
+  VERSIONS.forEach(v => {
+    const chip = document.createElement('button');
+    chip.className = 'v-chip';
+    if (v.key === state.displayVersion) chip.classList.add('active');
+    chip.innerHTML = v.icon + ' ' + v.label;
+    chip.onclick = () => {
+      state.displayVersion = v.key;
+      saveResultToStorage();
+      renderCharacter();
+      renderVersionSwitcher();
+    };
+    switcher.appendChild(chip);
+  });
+}
+
+function getShareText() {
+  const type = TYPES[state.resultType];
+  return '私は「' + type.name + '」でした！\nあなたの特性タイプもチェック ✨';
+}
+
+function shareX() {
+  const text = getShareText();
+  const shareUrl = 'https://x.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(SHARE_URL);
+  window.open(shareUrl, '_blank', 'noopener');
+}
+
+function shareLine() {
+  const text = getShareText() + '\n' + SHARE_URL;
+  const shareUrl = 'https://social-plugins.line.me/lineit/share?url=' + encodeURIComponent(SHARE_URL) + '&text=' + encodeURIComponent(text);
+  window.open(shareUrl, '_blank', 'noopener');
+}
+
+function copyUrl() {
+  const text = getShareText() + '\n' + SHARE_URL;
+  const btn = document.getElementById('copy-btn');
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => showCopyFeedback(btn)).catch(() => fallbackCopy(text, btn));
+  } else {
+    fallbackCopy(text, btn);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    showCopyFeedback(btn);
+  } catch (e) { showToast('コピーに失敗しました'); }
+  document.body.removeChild(textarea);
+}
+
+function showCopyFeedback(btn) {
+  btn.classList.add('copied');
+  btn.textContent = '✓ コピーしました！';
+  showToast('クリップボードにコピーしました ✨');
+  setTimeout(() => {
+    btn.classList.remove('copied');
+    btn.textContent = 'URLをコピー';
+  }, 2500);
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+function resetAll() {
+  state = {
+    profile: { name: '', birthday: null, age: null, gender: '' },
+    selectedVersion: null, currentQuestionIndex: 0,
+    answers: [], resultType: null, displayVersion: null
+  };
+  document.getElementById('input-name').value = '';
+  document.getElementById('input-year').value = '';
+  document.getElementById('input-month').value = '';
+  document.getElementById('input-day').value = '';
+  document.querySelectorAll('.gender-option').forEach(b => b.classList.remove('selected'));
+  clearStorage();
+  showScreen('screen-top');
+}
+</script>
+
+</body>
+</html>
